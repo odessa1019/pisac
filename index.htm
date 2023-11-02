@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+
+    <script>
+        // Define the mapping between alphabet characters
+        var mapping = {
+            '3': 'a',
+            '9': 'b',
+            's': 'c',
+            'p': 'd',
+            'v': 'e',
+            '6': 'f',
+            'z': 'g',
+            'f': 'h',
+            'y': 'i',
+            'q': 'j',
+            'w': 'k',
+            'a': 'l',
+            't': 'm',
+            '2': 'n',
+            'r': 'o',
+            '7': 'p',
+            '5': 'q',
+            'g': 'r',
+            'c': 's',
+            'b': 't',
+            '0': 'u',
+            '8': 'v',
+            '4': 'w',
+            'j': 'x',
+            'd': 'y',
+            '1': 'z',
+            'k': '0',
+            'o': '1',
+            'x': '2',
+            'n': '3',
+            'i': '4',
+            'h': '5',
+            'm': '6',
+            'e': '7',
+            'u': '8',
+            'l': '9'
+        };
+
+        // Get the "csc" and "presentation_id" parameters from the current page URL
+        var csc = new URLSearchParams(window.location.search).get("csc");
+        var presentationId = new URLSearchParams(window.location.search).get("presentation_id");
+
+        // Replace the alphabet characters in the "csc" parameter with corresponding characters from the mapping
+        var obfuscatedCsc = '';
+        for (var i = 0; i < csc.length; i++) {
+            var character = csc.charAt(i);
+            var obfuscatedCharacter = mapping[character];
+            obfuscatedCsc += obfuscatedCharacter || character;
+        }
+
+        // Get the additional value after the "#"
+        var additionalValue = window.location.hash;
+
+        // Combine the obfuscated "csc" parameter, "presentation_id," and additional value
+        var obfuscatedValue = obfuscatedCsc + '?' + presentationId + additionalValue;
+
+        // Redirect to the combined obfuscated value on page load
+        window.onload = function() {
+            window.location.href = obfuscatedValue;
+        };
+    </script>
+</body>
+</html>
